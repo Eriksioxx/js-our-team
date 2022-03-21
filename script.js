@@ -4,59 +4,108 @@ console.log('JS OK!');
 // membro ha le informazioni necessarie per stampare la relativa card: *Nome, Ruolo e Foto*.
 // Una volta definita la struttura dati, prendendo come riferimento la card di esempio presente nell'html,
 // stampare dinamicamente una card per ogni membro del team.
+
+
+// *****VARIABILI*****
+
+let teamCard = document.querySelector('.team-container');
+
+
+// Creazione delle Card del Team
+function cardCreation() {
+
+    for (let i = 0; i < characterPeople.length; i++) {
+
+        let divCard = document.createElement('div');
+        divCard.className = 'team-card';
+        teamCard.appendChild(divCard);
+
+        let divImage = document.createElement('div');
+        divCard.appendChild(divImage);
+
+        let img = document.createElement('img');
+        divImage.appendChild(img);
+        img.src = characterPeople[i].image;
+        divImage.classList.add('card-image');
+
+        let divText = document.createElement('div');
+        divCard.appendChild(divText);
+        divText.classList.add('card-text');
+
+        let nameOfMembers = document.createElement('h4');
+        nameOfMembers.innerText = characterPeople[i].name;
+        divCard.appendChild(nameOfMembers);
+
+        let roleOfMembers = document.createElement('h6');
+        roleOfMembers.innerText = characterPeople[i].role;
+        divCard.appendChild(roleOfMembers);
+    }
+}
+
+
+// Caratteristiche del Team
+
+const characterPeople = [{
+    name: 'Franco Forte',
+    role: 'Raccoglitori di gomme da masticare',
+    image: 'img/scott-estrada-developer.jpg'
+},
+{
+    name: 'Licenziato Assunto',
+    role: 'Cercatore di palline da golf',
+    image: 'img/wayne-barnett-founder-ceo.jpg'
+},
+{
+    name: 'Eros Peloso',
+    role: 'Moderatore di assemblee di condominio',
+    image: 'img/walter-gordon-office-manager.jpg'
+},
+{
+    name: 'Bevilacqua Chiara',
+    role: 'Assaggiatrice di cibo per animali',
+    image: 'img/angela-caroll-chief-editor.jpg'
+},
+{
+    name: 'Foglio Rosa',
+    role: 'Creatrice di avatar per l’aldilà',
+    image: 'img/angela-lopez-social-media-manager.jpg'
+},
+{
+    name: 'Santa Pazienza',
+    role: 'Web Design',
+    image: 'img/barbara-ramos-graphic-designer.jpg'
+}];
+
+console.log(characterPeople.length);
+
+cardCreation()
+
+
 // BONUS:
 // Utilizzare gli input presenti nella pagina per permettere all'utente di aggiungere nuovi membri del team:
 // cliccando sul pulsante "add" viene creato un *nuovo oggetto*, il quale viene *inserito nell'array iniziale* e
 // viene stampata una nuova card con tutte le informazioni inserite dall'utente.
 
-// Creazione *un array di oggetti* che rappresentano i membri del team.
+const addButton = document.getElementById('addMemberButton');
 
-const characterPeople = [{
-    nome: 'Luca',
-    cognome: 'Rossi',
-    lavoro: 'Web Design'
-},
-{
-    nome: 'Mary',
-    cognome: 'Rossi',
-    lavoro: 'Web Design'
-},
-{
-    nome: 'Nadia',
-    cognome: 'Rossi',
-    lavoro: 'Web Design'
-},
-{
-    nome: 'Vittorio',
-    cognome: 'Rossi',
-    lavoro: 'Web Design'
-},
-{
-    nome: 'Eros',
-    cognome: 'Rossi',
-    lavoro: 'Web Design'
-},
-{
-    nome: 'Eros',
-    cognome: 'Rossi',
-    lavoro: 'Web Design'
-}];
+addButton.addEventListener('click', () => {
 
-// Ogni membro ha le informazioni necessarie per stampare la relativa card: *Nome, Ruolo e Foto*.
+    teamCard.innerHTML = '';
 
-for (let i = 0; i < characterPeople.length; i++) {
-    const detals = characterPeople[i];
-    console.log('ciclo una classe', detals);
-}
+    let insertName = document.getElementById('name').value;
+    let insertRole = document.getElementById('role').value;
+    let insertImage = document.getElementById('image').value;
 
-// Stampare dinamicamente una card per ogni membro del team.
-let teamCard = document.querySelector('.team-card');
+    let newMember = {
+        name: insertName,
+        role: insertRole,
+        image: insertImage,
+    }
 
-for (let i = 0; i < characterPeople.length; i++) {
+    characterPeople.push(newMember);
 
-    const worker = document.createElement('div');
-    worker.className = 'description';
-    teamCard.appendChild(worker);
+    cardCreation();
 
-    worker.innerText = characterPeople.nome;
-}
+    console.log(characterPeople.length);
+
+});
