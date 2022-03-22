@@ -32,13 +32,13 @@ function cardCreation() {
         divCard.appendChild(divText);
         divText.classList.add('card-text');
 
-        let nameOfMembers = document.createElement('h4');
+        let nameOfMembers = document.createElement('h3');
         nameOfMembers.innerText = characterPeople[i].name;
-        divCard.appendChild(nameOfMembers);
+        divText.appendChild(nameOfMembers);
 
-        let roleOfMembers = document.createElement('h6');
+        let roleOfMembers = document.createElement('p');
         roleOfMembers.innerText = characterPeople[i].role;
-        divCard.appendChild(roleOfMembers);
+        divText.appendChild(roleOfMembers);
     }
 }
 
